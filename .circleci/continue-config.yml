@@ -36,7 +36,7 @@ aliases:
       paths:
         - ~/.cache/yarn
 
-jobs:
+commands:
   build_proxy:
     executor:
       name: docker/docker
@@ -45,7 +45,6 @@ jobs:
           path: packages/proxy
           deploy: false
           image: $CIRCLE_PROJECT_REPONAME/proxy
-
   build_services:
     executor:
       name: docker/docker
@@ -55,6 +54,7 @@ jobs:
           deploy: false
           image: $CIRCLE_PROJECT_REPONAME/services
 
+jobs:
   build_images:
     executor:
       name: node/default
