@@ -1,0 +1,37 @@
+{
+  "name": "circleci-monorepo",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "yarn workspaces run start",
+    "clean": "manypkg exec rm -rf dist",
+    "check": "yarn manypkg check",
+    "postinstall": "preconstruct dev",
+    "build": "preconstruct build"
+  },
+  "workspaces": [
+    "packages/*"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/kark/circleci-monorepo.git"
+  },
+  "dependencies": {
+    "@manypkg/cli": "^0.19.1",
+    "@preconstruct/cli": "^2.2.1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "private": true,
+  "bugs": {
+    "url": "https://github.com/kark/circleci-monorepo/issues"
+  },
+  "homepage": "https://github.com/kark/circleci-monorepo#readme",
+  "preconstruct": {
+    "packages": [
+      "packages/*"
+    ]
+  }
+}

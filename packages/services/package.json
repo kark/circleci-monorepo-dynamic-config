@@ -1,0 +1,17 @@
+{
+  "name": "services",
+  "main": "dist/services.cjs.js",
+  "version": "1.0.0",
+  "description": "services",
+  "license": "MIT",
+  "scripts": {
+    "build": "tsc",
+    "start": "node dist/services.cjs.js"
+  },
+  "dependencies": {
+    "typescript": "^4.7.4"
+  },
+  "devDependencies": {
+    "@tsconfig/node16": "^1.0.3"
+  }
+}

@@ -1,0 +1,34 @@
+version: 2.1
+orbs:
+  docker: circleci/docker@2.1.2
+
+parameters:
+  proxy:
+    type: boolean
+    default: false
+
+  services:
+    type: boolean
+    default: false
+
+jobs:
+  build_images:
+    - when:
+        condition: << pipeline.parameters.proxy >>
+        steps:
+          - docker/publish:
+            path: packages/proxy
+            deploy: false
+            image: $CIRCLE_PROJECT_REPONAME/proxy
+    - when:
+        condition: << pipeline.parameters.services >>
+        steps:
+          - docker/publish:
+            path: packages/services
+            deploy: false
+            image: $CIRCLE_PROJECT_REPONAME/services
+
+workflows:
+  build_images_workflow:
+    jobs:
+      - build_images

@@ -1,0 +1,17 @@
+{
+  "name": "proxy",
+  "main": "dist/proxy.cjs.js",
+  "version": "1.0.0",
+  "description": "proxy",
+  "license": "MIT",
+  "scripts": {
+    "build": "tsc",
+    "start": "node dist/proxy.cjs.js"
+  },
+  "dependencies": {
+    "typescript": "^4.7.4"
+  },
+  "devDependencies": {
+    "@tsconfig/node16": "^1.0.3"
+  }
+}
