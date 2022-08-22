@@ -46,6 +46,8 @@ workflows:
     jobs:
       - setup
       - path-filtering/filter:
+          requires:
+            - setup
           base-revision: master
           config-path: .circleci/continue-config.yml
           mapping: |
