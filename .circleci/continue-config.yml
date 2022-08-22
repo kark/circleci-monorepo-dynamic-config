@@ -51,6 +51,9 @@ jobs:
           condition: << pipeline.parameters.proxy >>
           steps:
             - docker/publish:
+                executor:
+                  image: circleci/node
+                  name: docker/docker
                 path: packages/proxy
                 deploy: false
                 image: $CIRCLE_PROJECT_REPONAME/proxy
@@ -58,6 +61,9 @@ jobs:
           condition: << pipeline.parameters.services >>
           steps:
             - docker/publish:
+                executor:
+                  image: circleci/node
+                  name: docker/docker
                 path: packages/services
                 deploy: false
                 image: $CIRCLE_PROJECT_REPONAME/services
