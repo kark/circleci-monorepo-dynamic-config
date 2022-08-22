@@ -40,14 +40,14 @@ jobs:
       - <<: *install_node_modules
       - <<: *build_monorepo
       - <<: *save_cache
+
+workflows:
+  setup-workflow:
+    jobs:
+      - setup
       - path-filtering/filter:
           base-revision: master
           config-path: .circleci/continue-config.yml
           mapping: |
             packages/proxy/.* proxy true
             packages/services/.* services true
-
-workflows:
-  setup-workflow:
-    jobs:
-      - setup
