@@ -38,6 +38,9 @@ aliases:
 
 jobs:
   build_images:
+    executor:
+      name: node/default
+      tag: "16.17.0"
     steps:
       - checkout
       - <<: *restore_cache
