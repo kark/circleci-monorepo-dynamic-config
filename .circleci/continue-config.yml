@@ -39,15 +39,13 @@ aliases:
 commands:
   build_proxy:
     steps:
-      - docker/publish:
+      - docker/build:
           path: packages/proxy
-          deploy: false
           image: $CIRCLE_PROJECT_REPONAME/proxy
   build_services:
     steps:
-      - docker/publish:
+      - docker/build:
           path: packages/services
-          deploy: false
           image: $CIRCLE_PROJECT_REPONAME/services
 
 jobs:
