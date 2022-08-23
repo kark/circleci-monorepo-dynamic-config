@@ -64,11 +64,13 @@ jobs:
       - when:
           condition: << pipeline.parameters.proxy >>
           steps:
-            - build_proxy
+            # - build_proxy
+            - run: echo "proxy"
       - when:
           condition: << pipeline.parameters.services >>
           steps:
-            - build_services
+            # - build_services
+            - run: echo "services"
 
 workflows:
   build_images_workflow:

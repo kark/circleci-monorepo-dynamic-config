@@ -5,49 +5,49 @@ orbs:
   node: circleci/node@5.0.2
   path-filtering: circleci/path-filtering@0.1.3
 
-aliases:
-  restore_cache: &restore_cache
-    restore_cache:
-      name: Restore Yarn Package Cache
-      keys:
-        - yarn-packages-{{ checksum "yarn.lock" }}
+# aliases:
+#   restore_cache: &restore_cache
+#     restore_cache:
+#       name: Restore Yarn Package Cache
+#       keys:
+#         - yarn-packages-{{ checksum "yarn.lock" }}
 
-  install_node_modules: &install_node_modules
-    run:
-      name: Install dependencies
-      command: yarn
+#   install_node_modules: &install_node_modules
+#     run:
+#       name: Install dependencies
+#       command: yarn
 
-  build_monorepo: &build_monorepo
-    run:
-      name: Build monorepo
-      command: yarn build
+#   build_monorepo: &build_monorepo
+#     run:
+#       name: Build monorepo
+#       command: yarn build
 
-  save_cache: &save_cache
-    save_cache:
-      name: Save Yarn Package Cache
-      key: yarn-packages-{{ checksum "yarn.lock" }}
-      paths:
-        - ~/.cache/yarn
+#   save_cache: &save_cache
+#     save_cache:
+#       name: Save Yarn Package Cache
+#       key: yarn-packages-{{ checksum "yarn.lock" }}
+#       paths:
+#         - ~/.cache/yarn
 
-jobs:
-  setup:
-    executor:
-      name: node/default
-      tag: "16.17.0"
-    steps:
-      - checkout
-      - <<: *restore_cache
-      - <<: *install_node_modules
-      - <<: *build_monorepo
-      - <<: *save_cache
+# jobs:
+#   setup:
+#     executor:
+#       name: node/default
+#       tag: "16.17.0"
+#     steps:
+#       - checkout
+#       - <<: *restore_cache
+#       - <<: *install_node_modules
+#       - <<: *build_monorepo
+#       - <<: *save_cache
 
 workflows:
   setup-workflow:
     jobs:
-      - setup
+      # - setup
       - path-filtering/filter:
-          requires:
-            - setup
+          # requires:
+          #   - setup
           base-revision: master
           config-path: .circleci/continue-config.yml
           mapping: |
