@@ -38,29 +38,25 @@ aliases:
 
 commands:
   build_proxy:
-    executor:
-      name: docker/docker
     steps:
-      - docker/publish:
+      - docker/build:
           path: packages/proxy
-          deploy: false
           image: $CIRCLE_PROJECT_REPONAME/proxy
   build_services:
-    executor:
-      name: docker/docker
     steps:
-      - docker/publish:
+      - docker/build:
           path: packages/services
-          deploy: false
           image: $CIRCLE_PROJECT_REPONAME/services
 
 jobs:
   build_images:
-    executor:
-      name: node/default
-      tag: "16.17.0"
+    docker:
+      - image: cimg/node:16.17.0
+      - image: cimg/base:2022.06
     steps:
       - checkout
+      - setup_remote_docker:
+          version: 20.10.14
       - <<: *restore_cache
       - <<: *install_node_modules
       - <<: *build_monorepo
@@ -68,13 +64,17 @@ jobs:
       - when:
           condition: << pipeline.parameters.proxy >>
           steps:
-            - build_proxy
+            # - build_proxy
+            - run: echo "proxy"
       - when:
           condition: << pipeline.parameters.services >>
           steps:
-            - build_services
+            # - build_services
+            - run: echo "services"
 
 workflows:
   build_images_workflow:
+    when:
+      or: [<< pipeline.parameters.proxy >>, << pipeline.parameters.services >>]
     jobs:
       - build_images
