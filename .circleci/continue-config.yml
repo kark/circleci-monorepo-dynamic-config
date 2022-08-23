@@ -70,5 +70,7 @@ jobs:
 
 workflows:
   build_images_workflow:
+    when:
+      or: [<< pipeline.parameters.proxy >>, << pipeline.parameters.services >>]
     jobs:
       - build_images
