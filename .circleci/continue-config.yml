@@ -38,16 +38,12 @@ aliases:
 
 commands:
   build_proxy:
-    executor:
-      name: docker/docker
     steps:
       - docker/publish:
           path: packages/proxy
           deploy: false
           image: $CIRCLE_PROJECT_REPONAME/proxy
   build_services:
-    executor:
-      name: docker/docker
     steps:
       - docker/publish:
           path: packages/services
