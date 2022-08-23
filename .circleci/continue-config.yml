@@ -36,23 +36,23 @@ aliases:
       paths:
         - ~/.cache/yarn
 
-# commands:
-#   build_proxy:
-#     executor:
-#       name: docker/docker
-#     steps:
-#       - docker/publish:
-#           path: packages/proxy
-#           deploy: false
-#           image: $CIRCLE_PROJECT_REPONAME/proxy
-#   build_services:
-#     executor:
-#       name: docker/docker
-#     steps:
-#       - docker/publish:
-#           path: packages/services
-#           deploy: false
-#           image: $CIRCLE_PROJECT_REPONAME/services
+commands:
+  build_proxy:
+    executor:
+      name: docker/docker
+    steps:
+      - docker/publish:
+          path: packages/proxy
+          deploy: false
+          image: $CIRCLE_PROJECT_REPONAME/proxy
+  build_services:
+    executor:
+      name: docker/docker
+    steps:
+      - docker/publish:
+          path: packages/services
+          deploy: false
+          image: $CIRCLE_PROJECT_REPONAME/services
 
 jobs:
   build_images:
@@ -68,11 +68,11 @@ jobs:
       - when:
           condition: << pipeline.parameters.proxy >>
           steps:
-            - run: echo "proxy"
+            - build_proxy
       - when:
           condition: << pipeline.parameters.services >>
           steps:
-            - run: echo "services"
+            - build_services
 
 workflows:
   build_images_workflow:
