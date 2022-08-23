@@ -68,17 +68,11 @@ jobs:
       - when:
           condition: << pipeline.parameters.proxy >>
           steps:
-            - docker/publish:
-                path: packages/proxy
-                deploy: false
-                image: $CIRCLE_PROJECT_REPONAME/proxy
+            - run: echo "proxy"
       - when:
           condition: << pipeline.parameters.services >>
           steps:
-            - docker/publish:
-                path: packages/services
-                deploy: false
-                image: $CIRCLE_PROJECT_REPONAME/services
+            - run: echo "services"
 
 workflows:
   build_images_workflow:
