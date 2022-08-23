@@ -51,8 +51,8 @@ commands:
 jobs:
   build_images:
     docker:
+      - image: cimg/node:16.17.0
       - image: cimg/base:2022.06
-      - image: cimg/node:16.16.0
     steps:
       - checkout
       - setup_remote_docker:
