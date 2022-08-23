@@ -56,8 +56,12 @@ commands:
 jobs:
   build_images:
     executor: node_16
+    docker:
+      - image: cimg/base:2022.06
     steps:
       - checkout
+      - setup_remote_docker:
+          version: 20.10.14
       - <<: *restore_cache
       - <<: *install_node_modules
       - <<: *build_monorepo
