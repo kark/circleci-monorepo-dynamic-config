@@ -3,6 +3,11 @@ orbs:
   docker: circleci/docker@2.1.2
   node: circleci/node@5.0.2
 
+executors:
+  node_16:
+    docker:
+      - image: cimg/node:16.16.0
+
 parameters:
   proxy:
     type: boolean
@@ -50,9 +55,7 @@ commands:
 
 jobs:
   build_images:
-    executor:
-      name: node/default
-      tag: "16.17.0"
+    executor: node_16
     steps:
       - checkout
       - <<: *restore_cache
